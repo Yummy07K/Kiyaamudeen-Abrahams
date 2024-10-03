@@ -1,0 +1,5 @@
+Navbar Dissapears when you squeeze the website too much.
+-Try implementing a burger menu
+
+Fix the skills 
+-C# seems like a no-go just use something else in the meanwhile.

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liquid Acid Splash Transition</title>
+  <style>
+    /* Basic button styling */
+    #triggerSplash {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #005500;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    /* Styling for the liquid splash transition effect */
+    #splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #00ff00; /* Acid green color */
+      clip-path: circle(0% at 50% 50%); /* Starts as a tiny dot in the center */
+      z-index: 9999; /* Above all content */
+      display: none; /* Initially hidden */
+    }
+
+    /* Animation for splash transition */
+    @keyframes splashExpand {
+      0% { clip-path: circle(0% at 50% 50%); }
+      100% { clip-path: circle(150% at 50% 50%); }
+    }
+
+    @keyframes splashContract {
+      0% { clip-path: circle(150% at 50% 50%); }
+      100% { clip-path: circle(0% at 50% 50%); }
+    }
+
+    .splash-expand {
+      display: block;
+      animation: splashExpand 1s forwards; /* 1 second splash-expand animation */
+    }
+
+    .splash-contract {
+      animation: splashContract 1s forwards; /* 1 second splash-contract animation */
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Button to trigger the splash effect -->
+  <button id="triggerSplash">Next Section</button>
+
+  <!-- Section to transition to -->
+  <div id="content" style="display: none;">
+    <h1>New Section Content</h1>
+    <p>This is the content revealed after the transition.</p>
+  </div>
+
+  <!-- Liquid Splash Layer -->
+  <div id="splash"></div>
+
+  <script>
+    document.getElementById('triggerSplash').addEventListener('click', function() {
+      // Get references to the splash layer and content
+      const splash = document.getElementById('splash');
+      const content = document.getElementById('content');
+
+      // Make the splash visible and start the expand animation
+      splash.style.display = 'block';
+      splash.classList.add('splash-expand');
+
+      // Wait for the splash to fully expand (1 second)
+      setTimeout(function() {
+        // Remove the expand class and add the contract class for the fade-out effect
+        splash.classList.remove('splash-expand');
+        splash.classList.add('splash-contract');
+
+        // Show the new content after the splash expands
+        content.style.display = 'block';
+
+        // Wait for the splash to fully contract before hiding it
+        setTimeout(function() {
+          splash.style.display = 'none';
+          splash.classList.remove('splash-contract');
+        }, 1000); // 1 second for splash-contract animation
+      }, 1000); // 1 second for splash-expand animation
+    });
+  </script>
+</body>
+</html>

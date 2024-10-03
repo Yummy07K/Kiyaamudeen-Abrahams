@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poisonous Gas Dissolve Transition</title>
+  <style>
+    /* Basic button styling */
+    #triggerGas {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #005500;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    /* Styling for the gas dissolve effect */
+    #gas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 255, 0, 0.3); /* Light toxic green gas color */
+      backdrop-filter: blur(0px); /* Start without blur */
+      opacity: 0; /* Initially invisible */
+      z-index: 9999; /* Above all content */
+      display: none; /* Hidden at first */
+    }
+
+    /* Animation for gas dissolve */
+    @keyframes gasAppear {
+      0% { backdrop-filter: blur(0px); opacity: 0; }
+      100% { backdrop-filter: blur(10px); opacity: 1; }
+    }
+
+    @keyframes gasDisappear {
+      0% { backdrop-filter: blur(10px); opacity: 1; }
+      100% { backdrop-filter: blur(0px); opacity: 0; }
+    }
+
+    .gas-appear {
+      display: block;
+      animation: gasAppear 1s forwards; /* 1 second fade-in and blur animation */
+    }
+
+    .gas-disappear {
+      animation: gasDisappear 1s forwards; /* 1 second dissolve animation */
+    }
+  </style>
+</head>
+<body>
+  <!-- Button to trigger the gas effect -->
+  <button id="triggerGas">Next Section</button>
+
+  <!-- Section to transition to -->
+  <div id="content" style="display: none;">
+    <h1>New Section Content</h1>
+    <p>This is the content revealed after the gas dissolve effect.</p>
+  </div>
+
+  <!-- Poisonous Gas Layer -->
+  <div id="gas"></div>
+
+  <script>
+    document.getElementById('triggerGas').addEventListener('click', function() {
+      // Get references to the gas layer and content
+      const gas = document.getElementById('gas');
+      const content = document.getElementById('content');
+
+      // Make the gas visible and start the appear animation
+      gas.style.display = 'block';
+      gas.classList.add('gas-appear');
+
+      // Wait for the gas to fully appear (1 second)
+      setTimeout(function() {
+        // Remove the appear class and add the disappear class for the fade-out effect
+        gas.classList.remove('gas-appear');
+        gas.classList.add('gas-disappear');
+
+        // Show the new content after the gas fades out
+        content.style.display = 'block';
+
+        // Wait for the gas to fully disappear before hiding it
+        setTimeout(function() {
+          gas.style.display = 'none';
+          gas.classList.remove('gas-disappear');
+        }, 1000); // 1 second for gas-disappear animation
+      }, 1000); // 1 second for gas-appear animation
+    });
+  </script>
+</body>
+</html>

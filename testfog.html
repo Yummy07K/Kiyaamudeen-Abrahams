@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viper Fog Transition</title>
+  <style>
+    /* Basic button styling */
+    #triggerFog {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #005500;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    /* Styling for the fog transition effect */
+    #fog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 255, 0, 0.2); /* Toxic green color */
+      backdrop-filter: blur(8px); /* Blurry effect */
+      display: none; /* Initially hidden */
+      z-index: 9999; /* Above all content */
+    }
+
+    /* Animation for fog transition */
+    @keyframes fogIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fogOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .fog-in {
+      animation: fogIn 1s forwards; /* 1 second fade-in animation */
+    }
+
+    .fog-out {
+      animation: fogOut 1s forwards; /* 1 second fade-out animation */
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Button to trigger the fog effect -->
+  <button id="triggerFog">Next Section</button>
+
+  <!-- Section to transition to -->
+  <div id="content" style="display: none;">
+    <h1>New Section Content</h1>
+    <p>This is the content revealed after the transition.</p>
+  </div>
+
+  <!-- Fog Layer -->
+  <div id="fog"></div>
+
+  <script>
+    document.getElementById('triggerFog').addEventListener('click', function() {
+      // Get references to the fog layer and content
+      const fog = document.getElementById('fog');
+      const content = document.getElementById('content');
+
+      // Make the fog visible by setting display to 'block'
+      fog.style.display = 'block';
+      fog.classList.add('fog-in');
+
+      // Wait for the fog to fully show (1 second)
+      setTimeout(function() {
+        // Remove the fog-in class and add fog-out for the fade-out effect
+        fog.classList.remove('fog-in');
+        fog.classList.add('fog-out');
+
+        // Show the new content
+        content.style.display = 'block';
+
+        // Wait for the fog to fade out before hiding it
+        setTimeout(function() {
+          fog.style.display = 'none';
+          fog.classList.remove('fog-out');
+        }, 1000); // 1 second for fog-out animation
+      }, 1000); // 1 second for fog-in animation
+    });
+  </script>
+</body>
+</html>
