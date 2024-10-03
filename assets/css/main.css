@@ -200,6 +200,7 @@ input, select, textarea {
 		line-height: 1.65;
 	}
 
+
 	select{
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
 		font-size: 17pt;
@@ -2232,6 +2233,7 @@ input, select, textarea {
 		opacity: 1.0;
 	}
 
+
 	label {
 		color: #ffffff;
 	}
@@ -2479,6 +2481,48 @@ input, select, textarea {
 		.icon.alt:active {
 			background-color: rgba(255, 255, 255, 0.2);
 		}
+/* Image Circle */
+.circle-container {
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    padding: 20px; /* Adjust to control space between image and first circle */
+    background-color: transparent; /* Background behind the image, optional */
+}
+
+.circle-container img {
+    border-radius: 50%;
+    display: block;
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Ensure the image is square */
+}
+
+.circle-container::before,
+.circle-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #888; /* Adjust color and thickness of the border */
+    box-sizing: border-box;
+}
+
+.circle-container::before {
+    transform: scale(1.2); /* First outer circle, slightly larger */
+    opacity: 0.5; /* Adjust transparency if needed */
+}
+
+.circle-container::after {
+    transform: scale(1.4); /* Second outer circle, larger than the first */
+    opacity: 0.3; /* Adjust transparency if needed */
+}
+
+.circle-container.style1 {
+	color: #efa8b0;
+}
 
 
 /* Image */
