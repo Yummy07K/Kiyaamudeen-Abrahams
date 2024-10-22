@@ -122,7 +122,7 @@
 
 })(jQuery);
 
-const texts = ["Kiyaamudeen Abrahams Portfolio", "I am a Developer", "I am a Creator", "I am a Gamer"];
+const texts = ["Kiyaamudeen Abrahams Portfolio", "I am a Developer", "I am a Creator", "I am an Analyst"];
 let index = 0;
 
 const animatedText = document.getElementById("animated-text");
